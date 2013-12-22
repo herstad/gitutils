@@ -1,7 +1,6 @@
 package git
 
-// Update below localRoot variables as relevant
-// All repositories in subdirectories of localRoot will have their status printed to std out
+// All repositories in root and its subdirectories will have their status printed to std out
 
 def defaultRoot = new File(".")
 

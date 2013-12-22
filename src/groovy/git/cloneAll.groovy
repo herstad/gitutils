@@ -1,6 +1,6 @@
 package git
 
-// All repositories in subdirectories of remoteRoot will be cloned to localRoot
+// All repositories in remoteRoot and its subdirectories will be cloned to localRoot
 
 if (args.length != 2) {
     println "usage: cloneAll remoteRoot localRoot"

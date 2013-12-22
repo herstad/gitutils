@@ -8,6 +8,4 @@ GROOVY_DIR="$CLASS_PATH/git"
 
 GROOVY_FILE="statusAll.groovy"
 
-$SCRIPT_DIR/git-all
-
 groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"

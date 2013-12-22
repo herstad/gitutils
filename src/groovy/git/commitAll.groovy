@@ -1,7 +1,6 @@
 package git
 
-// Update below defaultRoot variable as relevant
-// All repositories in subdirectories of localRoot will be pulled
+// All repositories in root and its subdirectories will be commited
 
 def defaultRoot = new File(".")
 
