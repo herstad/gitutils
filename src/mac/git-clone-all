@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# != 2 ]; then
+    usage="$(basename "$0") remoteRoot localRoot -- recursively clone all git repositories in remoteRoot to localRoot"
+    echo "usage: $usage"
+    exit 0
+fi
+
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+
+groovy -cp "$SCRIPT_DIR/../." "$SCRIPT_DIR/../groovy/cloneAll.groovy" "$@"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+
+groovy -cp "$SCRIPT_DIR/../." "$SCRIPT_DIR/../groovy/statusAll.groovy" "$1"
+
+
+
+
