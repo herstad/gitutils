@@ -8,4 +8,11 @@ fi
 
 SCRIPT_DIR=$(dirname "$BASH_SOURCE")
 
-groovy -cp "$SCRIPT_DIR/../." "$SCRIPT_DIR/../groovy/cloneAll.groovy" "$@"
+CLASS_PATH="$SCRIPT_DIR/../groovy"
+
+GROOVY_DIR="$CLASS_PATH/git"
+
+GROOVY_FILE="cloneAll.groovy"
+
+groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"
+

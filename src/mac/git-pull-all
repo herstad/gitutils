@@ -2,6 +2,10 @@
 
 SCRIPT_DIR=$(dirname "$BASH_SOURCE")
 
-groovy -cp "$SCRIPT_DIR/../." "$SCRIPT_DIR/../groovy/pullAll.groovy" "$1"
+CLASS_PATH="$SCRIPT_DIR/../groovy"
 
+GROOVY_DIR="$CLASS_PATH/git"
 
+GROOVY_FILE="pullAll.groovy"
+
+groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"
