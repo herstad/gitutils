@@ -12,11 +12,11 @@ def command = "git commit"
 
 def commandArgs
 
-def executeCommand = { localRepository ->
-    def shellResult = shell.execute("$command $commandArgs", localRepository)
+def executeCommand = { repository ->
+    def shellResult = shell.execute("$command $commandArgs", repository)
 
     if (!(shellResult.output =~ /nothing to commit, working directory clean/)) {
-        println localRepository.canonicalPath
+        println repository.canonicalPath
         println shellResult.command
         println shellResult.output
         println '********************************************************************************'

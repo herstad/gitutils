@@ -10,11 +10,11 @@ def shell = new shell.Shell()
 
 def command = "git status"
 
-def executeCommand = { localRepository ->
-    def shellResult = shell.execute(command, localRepository)
+def executeCommand = { repository ->
+    def shellResult = shell.execute(command, repository)
 
     if (!(shellResult.output =~ /# On branch master\nnothing to commit, working directory clean/)) {
-        println localRepository.canonicalPath
+        println repository.canonicalPath
         println shellResult.command
         println shellResult.output
         println '********************************************************************************'
