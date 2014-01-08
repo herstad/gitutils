@@ -28,15 +28,17 @@ def isRepository = { dir ->
 
 def clone = { remoteRepository ->
     def relativePath = new File(remoteRepository.parent).canonicalPath.substring(remoteRoot.canonicalPath.length())   
-    def repositoryName = remoteRepository.canonicalPath.replaceAll(".*" + File.separator, "")
+    // def repositoryName = remoteRepository.canonicalPath.replaceAll(".*" + File.separator, "")
+    def repositoryName = remoteRepository.name
     def localRepository = new File(localRoot, relativePath)
     localRepository.mkdirs()
 
     // println "remoteRepository: $remoteRepository"
     // println "localRepository: $localRepository"
+    // println "repositoryName: $repositoryName"
 
     if (isRepository(new File(localRepository, repositoryName))) {
-        println "localRepository $localRepository already exists. remoteRepository $remoteRepository not cloned"
+        println "localRepository $localRepository/$repositoryName already exists. remoteRepository $remoteRepository not cloned"
     } else {
         def command = "git clone \"${remoteRepository.canonicalPath}\""
         
