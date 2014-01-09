@@ -28,7 +28,6 @@ def isRepository = { dir ->
 
 def clone = { remoteRepository ->
     def relativePath = new File(remoteRepository.parent).canonicalPath.substring(remoteRoot.canonicalPath.length())   
-    // def repositoryName = remoteRepository.canonicalPath.replaceAll(".*" + File.separator, "")
     def repositoryName = remoteRepository.name
     def localRepository = new File(localRoot, relativePath)
     localRepository.mkdirs()
