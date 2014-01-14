@@ -1,5 +1,4 @@
 package shell
-
 import org.junit.Before
 import org.junit.Test
 import static org.junit.Assert.assertEquals
@@ -26,7 +25,8 @@ class ShellTest {
 
     @Test
     void testExecuteGroovy() {
-        String command = 'groovy -version'
+        println 'testExecuteGroovy'
+        String command = 'groovy -v'
 
         ShellResult shellResult = shell.execute(command, new File('.'))
 
