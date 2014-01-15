@@ -6,31 +6,31 @@ import groovy.util.slurpersupport.GPathResult
 import static groovyx.net.http.ContentType.JSON
 class RepoUtil {
 
-    def projectRegEx = 'ES..'
-    def repoRegEx = '.*'
-    def repoPathDelimiter = '\\.'
+    def projectPattern
+    def repositoryPattern
 
-    def RESTClient enterpriseService;
-    def String username;
-    def String password;
+    private RESTClient stashRestClient;
+    private String username;
+    private String password;
 
-    public RepoUtil(String rootURI, String username, String password) {
-        enterpriseService = new RESTClient( rootURI )
+    public RepoUtil(String rootURI, String projectPattern, String repositoryPattern, String username, String password) {
+        stashRestClient = new RESTClient( rootURI )
+        this.projectPattern = projectPattern
+        this.repositoryPattern = repositoryPattern
         this.username = username
         this.password = password
-        enterpriseService.defaultContentType = JSON
-
-        enterpriseService.headers['Authorization'] = 'Basic ' + ("$username:$password").bytes.encodeBase64()
+        stashRestClient.defaultContentType = JSON
+        stashRestClient.headers['Authorization'] = 'Basic ' + ("$username:$password").bytes.encodeBase64()
     }
 
     def getRemoteRepos = {
-        def createCloneURL = { repoUrl ->
+        def createCloneURL = {  repoUrl ->
             return "http://$username:$password" + repoUrl.substring(repoUrl.indexOf('@'))
         }
 
         def getMatchingRepos = { projectPath ->
-            enterpriseService.get( path : projectPath) { resp, json ->
-                json.values.findAll{it =~ repoRegEx}.collect {
+            stashRestClient.get( path : projectPath) { resp, json ->
+                json.values.findAll{it =~ repositoryPattern}.collect {
                     def command = createCloneURL(it.cloneUrl)
                     return new RemoteRepo(it.name, command)
                 }
@@ -38,12 +38,17 @@ class RepoUtil {
         }
 
         def getProjectKeys = {
-            ->
-            enterpriseService.get( path : 'projects') { resp, json ->
-                json.values.collect{ it.key }.findAll{ it =~ projectRegEx }
+            stashRestClient.get( path : 'projects') { resp, json ->
+                return json.values.collect{ it.key }.findAll{ it =~ projectPattern }
             }
         }
 
-        return getProjectKeys().collect { getMatchingRepos("projects/$it/repos") }.flatten()
+        def getReposFromProjectKeys = {
+            getProjectKeys().collect {
+                getMatchingRepos("projects/$it/repos")
+            }.flatten()
+        }
+        
+        return getReposFromProjectKeys()
     }
 }
