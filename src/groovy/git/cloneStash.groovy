@@ -16,7 +16,16 @@ def repoPathDelimiter
 def projectPattern
 def repositoryPattern
 
-// All bare repositories in remoteRoot and its subdirectories will be cloned to localRoot
+// Clones repositories from stash using a configuration file
+// Example configuration file:
+//{
+//    "rootURI": "http://example.com/stash/rest/api/1.0/",
+//    "localRoot": "C:/SomeProject/test",
+//    "projectPattern": "ES..|ENMI",
+//    "repositoryPattern": ".*",
+//    "repoPathDelimiter": "\\."
+// }
+
 
 if (args.length != 3) {
     println "usage: cloneStash configFile username password"
