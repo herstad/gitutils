@@ -1,11 +1,7 @@
 package git
-@Grab(group='org.codehaus.groovy.modules.http-builder',
-module='http-builder', version='0.6' )
-import groovyx.net.http.RESTClient
+
 import groovy.json.JsonSlurper
-import groovy.util.slurpersupport.GPathResult
 import stash.rest.RepoUtil
-import static groovyx.net.http.ContentType.JSON
 
 def shell = new shell.Shell()
 def jsonSlurper = new JsonSlurper()
