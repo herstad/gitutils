@@ -8,7 +8,7 @@ def jsonSlurper = new JsonSlurper()
 
 def configurationFile = args[0]
 def username = args[1]
-def password = args[2]
+def password = System.console().readPassword 'Password: '
 
 def rootURI
 def localRoot
@@ -27,8 +27,8 @@ def repositoryPattern
 // }
 
 
-if (args.length != 3) {
-    println "usage: cloneStash configFile username password"
+if (args.length != 2) {
+    println "usage: cloneStash configFile username"
     System.exit(0)
 }
 
@@ -63,7 +63,7 @@ def cloneRepo = { command, localRepository ->
 def createCloneCommand = { cloneURL -> "git clone $cloneURL ." }
 
 readConfiguration()
-repoUtil = new RepoUtil( rootURI, projectPattern, repositoryPattern, username, password)
+repoUtil = new RepoUtil( rootURI, projectPattern, repositoryPattern, username, password.toString())
 
 def repos = repoUtil.getRemoteRepos()
 
