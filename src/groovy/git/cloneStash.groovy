@@ -63,9 +63,9 @@ def cloneRepo = { command, localRepository ->
 def createCloneCommand = { cloneURL -> "git clone $cloneURL ." }
 
 readConfiguration()
-enterpriseService = new RepoUtil( rootURI, projectPattern, repositoryPattern, username, password)
+repoUtil = new RepoUtil( rootURI, projectPattern, repositoryPattern, username, password)
 
-def repos = enterpriseService.getRemoteRepos()
+def repos = repoUtil.getRemoteRepos()
 
 repos.each {
     cloneRepo(createCloneCommand(it.cloneURL), createLocalRepoDir(it.name))
