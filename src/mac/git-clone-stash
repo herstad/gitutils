@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# != 3 ]; then
+    usage="$(basename "$0") configFile username password -- clone as specified in configFile"
+    echo "usage: $usage"
+    exit 0
+fi
+
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+
+CLASS_PATH="$SCRIPT_DIR/../groovy"
+
+GROOVY_DIR="$CLASS_PATH/git"
+
+GROOVY_FILE="cloneStash.groovy"
+
+groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"
+

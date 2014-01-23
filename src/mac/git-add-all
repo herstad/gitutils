@@ -1,0 +1,11 @@
+#!/bin/bash
+
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+
+CLASS_PATH="$SCRIPT_DIR/../groovy"
+
+GROOVY_DIR="$CLASS_PATH/git"
+
+GROOVY_FILE="addAll.groovy"
+
+groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"
