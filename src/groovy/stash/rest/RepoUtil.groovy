@@ -24,15 +24,11 @@ class RepoUtil {
     }
 
     def getRemoteRepos = {
-        def createCloneURL = {  repoUrl ->
-            return "http://$username:$password" + repoUrl.substring(repoUrl.indexOf('@'))
-        }
 
         def getMatchingRepos = { projectPath ->
             stashRestClient.get( path : projectPath) { resp, json ->
                 json.values.findAll{it =~ repositoryPattern}.collect {
-                    def command = createCloneURL(it.cloneUrl)
-                    return new RemoteRepo(it.name, command)
+                    return new RemoteRepo(it.name, it.cloneUrl)
                 }
             }
         }
