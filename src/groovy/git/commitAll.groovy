@@ -3,30 +3,8 @@ package git
 // All repositories in root and its subdirectories will be commited
 
 def defaultRoot = new File(".")
-
 def root = args ? new File(args[0]) : defaultRoot
-
-def shell = new shell.Shell()
-
 def command = "git commit"
-
-def commandArgs
-
-def executeCommand = { repository ->
-    def shellResult = shell.execute("$command $commandArgs", repository)
-
-    if (!(shellResult.output =~ /nothing to commit, working directory clean/)) {
-        println repository.canonicalPath
-        println shellResult.command
-        println shellResult.output
-        println '********************************************************************************'
-    }
-}
-
-def isRepository = { dir -> 
-    def dotGit = new File(dir, '.git')
-    return dotGit.exists()
-}
 
 def readInput = { label ->
     print label
@@ -43,15 +21,7 @@ if (!commitMessage) {
     println "You must enter a commit message"
     System.exit(0);
 } else {
-    commandArgs = "-am \"$commitMessage\""
-
-    if (isRepository(root)) {
-       executeCommand(root)
-    }
-
-    root.eachDirRecurse({ dir ->
-        if (isRepository(dir)) {
-            executeCommand(dir)
-        }
+    new LocalCommand().execute(root, "git commit -am $commitMessage", { output -> 
+        true
     })
 }

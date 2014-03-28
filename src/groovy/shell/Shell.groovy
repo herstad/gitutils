@@ -16,7 +16,12 @@ class Shell {
 
         process.waitFor()
 
-        return new ShellResult(command, output.trim(), process.exitValue())
+        return new ShellResult(
+            command: command, 
+            workingDir: workingDir,
+            output: output.trim(),
+            exitValue:process.exitValue()
+        )
     }
 
     private String[] addShellPrefix(String command) {
