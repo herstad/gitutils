@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# < 1 ]; then
+    usage="$(basename "$0") command root-- execute command in each repository"
+    echo "usage: $usage"
+    exit 0
+fi
+
+SCRIPT_DIR=$(dirname "$BASH_SOURCE")
+
+CLASS_PATH="$SCRIPT_DIR/../groovy"
+
+GROOVY_DIR="$CLASS_PATH/git"
+
+GROOVY_FILE="commandAll.groovy"
+
+groovy -cp $CLASS_PATH "$GROOVY_DIR/$GROOVY_FILE" "$@"
