@@ -2,7 +2,7 @@ package git
 
 // All repositories in root and its subdirectories will have command executed
 
-if (args.length != 1) {
+if (args.length < 1) {
     println "usage: commandAll <command> [root]"
     System.exit(0)
 }
