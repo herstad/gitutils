@@ -1,6 +1,7 @@
 package shell
 
 class Shell {
+    private static final boolean WINDOWS = System.properties['os.name'].toLowerCase().contains('windows')
 
     ShellResult execute(String command, File workingDir) {
         String output = ''
@@ -25,8 +26,12 @@ class Shell {
     }
 
     private String[] addShellPrefix(String command) {
-        if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        if (WINDOWS) {
             return ['cmd', '/C', command]
+        }
+        def envShell = System.getenv()['SHELL']
+        if (envShell) {
+            return [envShell, '-c', command]
         }
         return ['sh', '-c', command]
     }
