@@ -29,10 +29,6 @@ class Shell {
         if (WINDOWS) {
             return ['cmd', '/C', command]
         }
-        def envShell = System.getenv()['SHELL']
-        if (envShell) {
-            return [envShell, '-c', command]
-        }
-        return ['sh', '-c', command]
+        return [System.getenv()['SHELL'] ?: 'sh', '-c', command]
     }
 }
