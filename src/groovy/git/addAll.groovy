@@ -1,6 +1,6 @@
 package git
 
-// All repositories in root and its subdirectories will be pushed
+// All repositories in root and its subdirectories will have not added files added
 
 def defaultRoot = new File(".")
 def root = args ? new File(args[0]) : defaultRoot
