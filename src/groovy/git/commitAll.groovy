@@ -21,7 +21,7 @@ if (!commitMessage) {
     println "You must enter a commit message"
     System.exit(0);
 } else {
-    new LocalCommand().execute(root, "git commit -am $commitMessage", { output -> 
+    new LocalCommand().execute(root, "git commit -m $commitMessage", { output ->
         true
     })
 }
