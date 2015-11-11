@@ -1,9 +1,4 @@
-git
-===
-
-git utilities
-
-# Usage #
+# Git Utilities - Usage #
 
 ## Using groovy ##
 
@@ -16,21 +11,39 @@ git utilities
 
 There are scripts in src/mac that executes commands with the current folder as root.
 
-Assuming alias have been created for the commands
+There are two ways to make the new commands available. Either integrated in git or as aliases for the commands
+
+### Using the commands integrated in git ###
 
     From <gitRootDir>
-    Run: <command>
+    Run: git <command>
 
     Exemple:
     cd ~/src/allMyGitRepos
-    git-status-all
+    git status-all
+
+### Assuming alias have been created for the commands ###
+
+    From <gitRootDir>
+    Run: <commandAlias>
+
+    Exemple:
+    cd ~/src/allMyGitRepos
+    gsa
+
+### Add scripts to path ###
+
+Add in .bash_profile scripts to path
+
+    Example:
+    export PATH=$PATH:/<pathToGitUtils>/gitutils/src/mac
 
 ### Create alias for command ###
 
 Add in .bash_profile for each command
 
     alias <command_alias>='./<pathToGitUtils>/src/mac/<command>'
-    Example: alias git-status-all='~/./src/gitutils/src/mac/git-status-all'
+    Example: alias gsa='~/./src/gitutils/src/mac/git-status-all'
 
 
 
